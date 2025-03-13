@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opt In / Opt Out Agreement - Civion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: white;
+        }
+        
+        .legal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .legal-content h1 {
+            color: #2d63c8;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        
+        .legal-section {
+            margin-bottom: 4rem;
+            padding: 2.5rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+            transition: transform 0.2s ease;
+        }
+        
+        .legal-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        
+        .legal-section h2 {
+            color: #2d63c8;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .legal-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .legal-section li {
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
+            position: relative;
+            transition: transform 0.2s ease;
+            cursor: default;
+        }
+        
+        .legal-section li:hover {
+            transform: translateX(5px);
+            color: #2d63c8;
+        }
+        
+        .legal-section li:before {
+            content: "•";
+            color: #2d63c8;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        
+        .section-intro {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            padding: 0 1rem;
+        }
+        
+        .subsection {
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .subsection h3 {
+            color: #343a40;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .legal-content {
+                padding: 2rem 1rem;
+            }
+            
+            .legal-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .legal-content h1 {
+                font-size: 2rem;
+            }
+            
+            .legal-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .subsection h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">CIVION</a>
+            <div class="nav-links">
+                <a href="demo.html">Demo</a>
+                <a href="faq.html">FAQ</a>
+                <a href="https://calendly.com/management-civion/30min" target="_blank" class="request-demo-btn">Schedule Demo</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="legal-content">
+            <h1>Opt In / Opt Out Agreement</h1>
+            
+            <div class="legal-section">
+                <h2>Communication Preferences</h2>
+                <p class="section-intro">This agreement outlines your rights and options regarding communication preferences with Civion's AI-powered textbanking platform.</p>
+                <div class="subsection">
+                    <h3>Opt-In Rights</h3>
+                    <ul>
+                        <li>Explicit consent required for receiving campaign messages</li>
+                        <li>Clear disclosure of message frequency and content type</li>
+                        <li>Option to specify preferred communication times</li>
+                        <li>Ability to modify preferences at any time</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>Opt-Out Process</h3>
+                    <ul>
+                        <li>Simple one-step opt-out process available</li>
+                        <li>Immediate processing of opt-out requests</li>
+                        <li>Confirmation of opt-out status provided</li>
+                        <li>Permanent record of opt-out preferences maintained</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2>Data Management</h2>
+                <p class="section-intro">Understanding how your communication preferences affect data handling and storage.</p>
+                <div class="subsection">
+                    <h3>Data Retention</h3>
+                    <ul>
+                        <li>Secure storage of communication preferences</li>
+                        <li>Regular updates to preference database</li>
+                        <li>Historical record of preference changes</li>
+                        <li>Compliance with data protection regulations</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3>Privacy Protection</h3>
+                    <ul>
+                        <li>No sharing of opt-out information with third parties</li>
+                        <li>Encrypted storage of preference data</li>
+                        <li>Regular audits of preference management system</li>
+                        <li>Transparent reporting of data handling practices</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2>Opt-Out Registration</h2>
+                <p class="section-intro">Use the form below to opt out of receiving messages from our service.</p>
+                <div class="subsection">
+                    <form id="optOutForm" style="max-width: 400px; margin: 0 auto;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <label for="phoneNumber" style="display: block; margin-bottom: 0.5rem; color: #343a40; font-weight: 500;">Phone Number</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required 
+                                style="width: 100%; padding: 0.75rem; border: 1px solid #e9ecef; border-radius: 6px; font-size: 1rem; transition: border-color 0.2s ease;">
+                        </div>
+                        <button type="submit" 
+                            style="width: 100%; padding: 0.75rem; background-color: #2d63c8; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s ease;">
+                            Submit Opt-Out Request
+                        </button>
+                    </form>
+                    <div id="optOutMessage" style="margin-top: 1rem; text-align: center; display: none;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('optOutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const messageDiv = document.getElementById('optOutMessage');
+            
+            // Here you would typically make an API call to your backend
+            // For now, we'll just show a success message
+            messageDiv.textContent = `Your number ${phoneNumber} has been successfully opted out.`;
+            messageDiv.style.display = 'block';
+            messageDiv.style.color = '#28a745';
+            messageDiv.style.padding = '1rem';
+            
+            // Clear the form
+            this.reset();
+        });
+
+        // Format phone number as user types
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 3 && value.length <= 6) {
+                value = value.slice(0,3) + '-' + value.slice(3);
+            } else if (value.length > 6) {
+                value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6,10);
+            }
+            e.target.value = value;
+        });
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Civion</h4>
+                <p>AI-Powered Political Textbanking</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>management@civion.info</p>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="agreements.html">Agreements</a>
+                <a href="opt-in-opt-out.html">Opt In / Opt Out Agreement</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Civion. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

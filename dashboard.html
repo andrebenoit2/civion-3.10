@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Civion</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            min-width: 1024px;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            padding: 0 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            margin-left: auto;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.logout {
+            color: #dc3545;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 60px - 200px); /* Adjust for top bar and footer */
+        }
+
+        .dashboard-content {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .dashboard-nav {
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1rem;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .nav-tab:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .dashboard-page {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1rem;
+            height: calc(100vh - 60px - 150px); /* Account for top bar and spacing */
+            overflow: hidden;
+        }
+
+        .dashboard-page.active {
+            display: block;
+        }
+
+        .dashboard-page iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            background: white;
+        }
+
+        /* Dashboard Footer Styles */
+        footer {
+            background-color: white;
+            padding: 2rem;
+            margin-top: auto;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .footer-section a {
+            color: var(--text-gray);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body onload="checkAuth()">
+    <div class="top-bar">
+        <a href="index.html" class="logo">CIVION</a>
+        <div class="nav-links">
+            <a href="demo.html">Demo</a>
+            <a href="faq.html">FAQ</a>
+            <a href="#" onclick="logout()" class="logout">Logout</a>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="dashboard-nav">
+            <button class="nav-tab active" data-tab="customize">Customize Chatbot</button>
+            <button class="nav-tab" data-tab="distribution">Distribution</button>
+            <button class="nav-tab" data-tab="analytics">Analytics</button>
+        </div>
+
+        <div class="dashboard-content">
+            <div id="customize" class="dashboard-page active">
+                <iframe src="customize-chatbot.html"></iframe>
+            </div>
+            <div id="distribution" class="dashboard-page">
+                <iframe src="distribution.html"></iframe>
+            </div>
+            <div id="analytics" class="dashboard-page">
+                <iframe src="analytics.html"></iframe>
+            </div>
+        </div>
+        <div style="height: 150px;"></div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Civion</h4>
+                <p>AI-Powered Political Textbanking</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>management@civion.info</p>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="agreements.html">Agreements</a>
+                <a href="opt-in-opt-out.html">Opt In / Opt Out Agreement</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Civion. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and pages
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.dashboard-page').forEach(p => p.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding page
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

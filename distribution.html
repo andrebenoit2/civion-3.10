@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribution - Civion</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --secondary-blue: #0747A6;
+            --light-blue: #E6F0FF;
+            --white: #FFFFFF;
+            --gray: #4A4A4A;
+            --light-gray: #F4F5F7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray);
+            background-color: var(--white);
+            padding: 1rem;
+            height: calc(100vh - 280px);
+            overflow-y: auto;
+        }
+
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+
+        footer {
+            background-color: rgba(248, 249, 250, 0.8);
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--gray);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="distribution-page">
+    <div class="distribution-content">
+        <h2>Campaign Distribution</h2>
+
+        <div class="benchmarks-grid">
+            <div class="benchmark-card">
+                <h3>Active Contacts</h3>
+                <div class="benchmark-value">5,678</div>
+                <div class="benchmark-trend">Last updated today</div>
+            </div>
+
+            <div class="benchmark-card">
+                <h3>Messages Sent</h3>
+                <div class="benchmark-value">12,345</div>
+                <div class="benchmark-trend">This week</div>
+            </div>
+
+            <div class="benchmark-card">
+                <h3>Coverage</h3>
+                <div class="benchmark-value">67%</div>
+                <div class="benchmark-trend">Of target area</div>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <h3>Upload Contact List</h3>
+            <div class="upload-container">
+                <div class="file-upload-area">
+                    <p class="upload-prompt">Drag and drop your contact list here or <span class="upload-link">browse files</span></p>
+                    <input type="file" id="contact-list" accept=".csv,.xlsx" style="display: none;">
+                </div>
+                <p class="upload-hint">Supported formats: CSV, Excel (.xlsx)</p>
+                <div class="template-download">
+                    <a href="#">Download template</a>
+                    <p class="template-hint">Use our template to ensure proper formatting</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="conversations-section">
+            <h3>Recent Conversations</h3>
+            <div class="conversation-filters">
+                <input type="text" placeholder="Search conversations...">
+                <select>
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                    <option value="pending">Pending</option>
+                </select>
+                <select>
+                    <option value="all">All Areas</option>
+                    <option value="north">North District</option>
+                    <option value="south">South District</option>
+                    <option value="east">East District</option>
+                    <option value="west">West District</option>
+                </select>
+            </div>
+            <div class="conversations-list">
+                <div class="no-conversations">
+                    <p>No conversations to display</p>
+                    <p class="hint">Upload a contact list to start engaging with voters</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Civion</h4>
+                <p>AI-Powered Political Textbanking</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>management@civion.info</p>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="agreements.html">Agreements</a>
+                <a href="opt-in-opt-out.html">Opt In / Opt Out Agreement</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Civion. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
