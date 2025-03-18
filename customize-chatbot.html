@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Chatbot - Civion</title>
+    <style>
+        :root {
+            --primary-blue: #0052CC;
+            --secondary-blue: #0747A6;
+            --light-blue: #E6F0FF;
+            --white: #FFFFFF;
+            --gray: #4A4A4A;
+            --light-gray: #F4F5F7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray);
+            background-color: var(--white);
+            padding: 2rem;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .campaign-customization {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .chatbot-section {
+            flex: 1;
+            padding: 1rem;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .customization-field {
+            margin-bottom: 1.5rem;
+        }
+
+        .customization-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .customization-field input,
+        .customization-field select,
+        .customization-field textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+        }
+
+        .customization-field input:focus,
+        .customization-field select:focus,
+        .customization-field textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .info-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 18px;
+            font-size: 12px;
+            margin-left: 0.5rem;
+            cursor: help;
+            position: relative;
+        }
+
+        .info-popup {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            padding: 0.75rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 200px;
+            font-size: 0.875rem;
+            z-index: 1000;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 0.5rem;
+        }
+
+        .info-icon:hover .info-popup {
+            display: block;
+        }
+
+        .train-button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .train-button:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        .train-button:disabled {
+            background-color: var(--light-gray);
+            cursor: not-allowed;
+        }
+
+        .chatbot-container {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .chat-messages {
+            flex: 1;
+            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow-y: auto;
+            height: calc(100% - 120px);
+            min-height: 300px;
+            margin-bottom: 60px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+
+        .message {
+            padding: 0.5rem;
+            background-color: var(--white);
+            border-radius: 4px;
+        }
+
+        .message.bot {
+            color: var(--gray);
+        }
+
+        .message.user {
+            color: var(--primary-blue);
+            text-align: right;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 1rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+            border-radius: 4px;
+            background-color: var(--white);
+        }
+
+        .chat-input button {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .chat-input button:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        h2 {
+            color: var(--secondary-blue);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="campaign-customization">
+            <h2>Campaign Customization</h2>
+            <div class="customization-field">
+                <label for="campaign-name">Campaign Name
+                    <span class="info-icon">i
+                        <div class="info-popup">The name of your campaign that will be displayed to users when they interact with your chatbot.</div>
+                    </span>
+                </label>
+                <input type="text" id="campaign-name" name="campaign-name" class="left-aligned">
+            </div>
+
+            <div class="customization-field">
+                <label for="campaign-representative">Campaign Representative
+                    <span class="info-icon">i
+                        <div class="info-popup">The name of the person responsible for managing this campaign and chatbot.</div>
+                    </span>
+                </label>
+                <input type="text" id="campaign-representative" name="campaign-representative" class="left-aligned">
+            </div>
+
+            <div class="customization-field">
+                <label for="campaign-scope">Campaign Scope
+                    <span class="info-icon">i
+                        <div class="info-popup">The geographical scope of your campaign.</div>
+                    </span>
+                </label>
+                <select id="campaign-scope" name="campaign-scope" class="left-aligned" onchange="checkScope()">
+                    <option value="">Select a scope...</option>
+                    <option value="local">Local</option>
+                    <option value="state">State</option>
+                    <option value="federal">Federal</option>
+                </select>
+                <div id="enterprise-disclaimer" style="display: none; color: #e74c3c; margin-top: 8px; font-size: 0.9em;">
+                    Note: State and federal campaigns require Civion enterprise solutions.
+                </div>
+            </div>
+
+            <div class="customization-field">
+                <label for="campaign-goal">Campaign Goal
+                    <span class="info-icon">i
+                        <div class="info-popup">The primary objective of your campaign.</div>
+                    </span>
+                </label>
+                <select id="campaign-goal" name="campaign-goal" class="left-aligned">
+                    <option value="">Select a goal...</option>
+                    <option value="voter-registration">Voter Registration</option>
+                    <option value="vote-for-candidate">Vote for Candidate</option>
+                    <option value="fundraising">Fundraising</option>
+                </select>
+            </div>
+
+            <div class="customization-field">
+                <label for="introductory-message">Introductory Message
+                    <span class="info-icon">i
+                        <div class="info-popup">The first message users will see when they start chatting.</div>
+                    </span>
+                </label>
+                <textarea id="introductory-message" name="introductory-message" class="left-aligned" rows="3" placeholder="Enter the bot's greeting message..."></textarea>
+            </div>
+
+            <div class="customization-field">
+                <label for="training-pdf">Training PDF
+                    <span class="info-icon">i
+                        <div class="info-popup">Upload PDF documents with campaign information.</div>
+                    </span>
+                </label>
+                <input type="file" id="training-pdf" name="training-pdf" accept=".pdf" class="left-aligned">
+            </div>
+
+            <div class="customization-field">
+                <label for="training-text">Training Text
+                    <span class="info-icon">i
+                        <div class="info-popup">Additional text-based training data for your chatbot.</div>
+                    </span>
+                </label>
+                <textarea id="training-text" name="training-text" class="left-aligned" rows="4" placeholder="Enter additional training text..."></textarea>
+            </div>
+
+            <button class="train-button" onclick="trainBot()">Train Assistant</button>
+        </div>
+
+        <div class="chatbot-section">
+            <div class="chatbot-container">
+                <h2>Interact With Your Bot</h2>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot" id="introMessage">
+                        Hello! I'm your campaign assistant. How can I help you today?
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript remains exactly the same
+        document.getElementById('introductory-message').addEventListener('input', function() {
+            const introMessage = this.value.trim() || "Hello! I'm your campaign assistant. How can I help you today?";
+            document.getElementById('introMessage').textContent = introMessage;
+        });
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+
+                const campaignName = document.getElementById('campaign-name').value || 'our campaign';
+                const campaignGoal = document.getElementById('campaign-goal').value;
+                const campaignScope = document.getElementById('campaign-scope').value;
+                const trainingText = document.getElementById('training-text').value;
+
+                setTimeout(() => {
+                    let response;
+                    
+                    if (trainingText && message.toLowerCase().split(' ').some(word => 
+                        trainingText.toLowerCase().includes(word) && word.length > 3)) {
+                        const sentences = trainingText.split(/[.!?]+/);
+                        const relevantSentence = sentences.find(sentence => 
+                            message.toLowerCase().split(' ').some(word => 
+                                sentence.toLowerCase().includes(word) && word.length > 3
+                            )
+                        );
+                        if (relevantSentence) {
+                            response = relevantSentence.trim();
+                        }
+                    }
+
+                    if (!response) {
+                        const responses = {
+                            'voter-registration': [
+                                `I can help you register to vote in ${campaignScope === 'local' ? 'your local area' : campaignScope === 'state' ? 'your state' : 'your area'}.`,
+                                "Would you like information about voter registration deadlines?",
+                                "I can guide you through the registration process step by step."
+                            ],
+                            'vote-for-candidate': [
+                                `Let me tell you about ${campaignName}'s vision for ${campaignScope === 'local' ? 'our community' : campaignScope === 'state' ? 'our state' : 'our country'}.`,
+                                "Would you like to know more about our candidate's position on key issues?",
+                                "I can share information about upcoming campaign events."
+                            ],
+                            'fundraising': [
+                                "Would you like to learn about ways to contribute to our campaign?",
+                                "I can provide information about our fundraising goals and how your support helps.",
+                                "Let me tell you about the impact of your potential contribution."
+                            ]
+                        };
+
+                        const defaultResponses = [
+                            `I'm here to help with ${campaignName}. What would you like to know?`,
+                            "I can provide information about our campaign initiatives.",
+                            "How can I assist you with your questions about our campaign?"
+                        ];
+
+                        const responseArray = responses[campaignGoal] || defaultResponses;
+                        response = responseArray[Math.floor(Math.random() * responseArray.length)];
+                    }
+
+                    addMessage(response, 'bot');
+                }, 1000);
+            }
+        }
+
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function checkScope() {
+            const scope = document.getElementById('campaign-scope').value;
+            const disclaimer = document.getElementById('enterprise-disclaimer');
+            disclaimer.style.display = (scope === 'state' || scope === 'federal') ? 'block' : 'none';
+        }
+
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function trainBot() {
+            const pdfInput = document.getElementById('training-pdf');
+            const textInput = document.getElementById('training-text');
+            const trainButton = document.querySelector('.train-button');
+            const campaignName = document.getElementById('campaign-name').value || 'the campaign';
+            const campaignGoal = document.getElementById('campaign-goal').value;
+            
+            const originalText = trainButton.textContent;
+            trainButton.textContent = 'Training...';
+            trainButton.disabled = true;
+
+            setTimeout(() => {
+                const goalSpecificMessage = {
+                    'voter-registration': 'I now understand the registration process and requirements.',
+                    'vote-for-candidate': 'I have learned about our candidate\'s positions and campaign messages.',
+                    'fundraising': 'I am now equipped with information about our fundraising goals and donor programs.'
+                };
+
+                const trainingMessage = `Training complete for ${campaignName}! ${goalSpecificMessage[campaignGoal] || ''} I've processed ${pdfInput.files.length} PDF(s) and ${textInput.value.length} characters of training text. I'm ready to engage with potential ${campaignGoal === 'voter-registration' ? 'voters' : campaignGoal === 'vote-for-candidate' ? 'supporters' : 'donors'}.`;
+                addMessage(trainingMessage, 'bot');
+
+                trainButton.textContent = originalText;
+                trainButton.disabled = false;
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>

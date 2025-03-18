@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Civion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-styles.css">
+    <script src="auth.js"></script>
+</head>
+<body class="demo-page">
+    <header>
+        <nav>
+            <a href="index.html" class="logo">CIVION</a>
+            <div class="nav-links">
+                <a href="demo.html">Demo</a>
+                <a href="faq.html">FAQ</a>
+                <a href="https://calendly.com/management-civion/30min" target="_blank" class="request-demo-btn">Schedule Demo</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        <div class="mobile-nav">
+            <a href="demo.html">Demo</a>
+            <a href="faq.html">FAQ</a>
+            <a href="https://calendly.com/management-civion/30min" target="_blank" class="request-demo-btn">Schedule Demo</a>
+        </div>
+    </header>
+
+    <div class="container demo-container">
+        <div class="demo-header">
+            <h1>Experience Civion AI</h1>
+            <p>See how our AI-powered textbanking platform can transform your campaign outreach.</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-info">
+                <div class="info-card">
+                    <h2>Try Our Demo Bot</h2>
+                    <p>This demo showcases our AI's ability to engage in natural conversations, answer questions about policies, and assist with voter registration. Feel free to ask questions and see how it handles various scenarios.</p>
+                    <ul class="demo-features">
+                        <li>Natural language understanding</li>
+                        <li>Policy knowledge base</li>
+                        <li>Voter registration assistance</li>
+                        <li>Campaign information</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h2>Key Features</h2>
+                    <ul class="feature-list">
+                        <li>24/7 Voter Engagement</li>
+                        <li>Multilingual Support</li>
+                        <li>Real-time Analytics</li>
+                        <li>Compliance Ready</li>
+                    </ul>
+                    <a href="https://calendly.com/management-civion/30min" target="_blank" class="demo-cta">Schedule a Demo</a>
+                </div>
+            </div>
+
+            <div class="chatbot-wrapper">
+                <div class="chatbot-header">
+                    <h3>Harris for President Chatbot</h3>
+                    <p>Interactive Demo</p>
+                </div>
+                <iframe
+                src="https://www.chatbase.co/chatbot-iframe/Av-_pqNfDszqTrv8QhgGi"
+                width="100%"
+                frameborder="0"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Civion</h4>
+                <p>AI-Powered Political Textbanking</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>management@civion.info</p>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="agreements.html">Agreements</a>
+                <a href="opt-in-opt-out.html">Opt In / Opt Out Agreement</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Civion. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            if (mobileMenuToggle && mobileNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenuToggle.classList.toggle('active');
+                    mobileNav.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

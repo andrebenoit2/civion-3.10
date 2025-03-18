@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            padding: 0 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .page-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-right: auto;
+            position: relative;
+        }
+
+        .page-selector:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .page-selector::after {
+            content: "▼";
+            font-size: 0.7em;
+            margin-left: 0.5rem;
+            color: var(--gray);
+            transition: transform 0.2s ease;
+        }
+
+        .page-selector:hover::after {
+            transform: rotate(180deg);
+        }
+
+        .page-options {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            min-width: 200px;
+            z-index: 100;
+            border: 1px solid #eee;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .page-selector:hover .page-options {
+            display: block;
+        }
+
+        .page-option {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .page-option:hover {
+            background: #f8f9fa;
+            color: var(--primary-blue);
+        }
+
+        .page-option.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .profile-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .profile-button:hover,
+        .profile-button:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            outline: none;
+        }
+
+        .profile-button::before {
+            content: "👤";
+            font-size: 1.1em;
+        }
+
+        .profile-button::after {
+            content: "▼";
+            font-size: 0.7em;
+            margin-left: 0.5rem;
+            color: var(--gray);
+            transition: transform 0.2s ease;
+        }
+
+        .profile-button:hover::after,
+        .profile-button:focus::after {
+            transform: rotate(180deg);
+        }
+
+        .profile-details {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            min-width: 280px;
+            z-index: 100;
+            border: 1px solid #eee;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-button:hover .profile-details,
+        .profile-button:focus .profile-details {
+            display: block;
+        }
+
+        .profile-details p {
+            margin: 0.5rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+        }
+
+        .profile-details p span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .profile-details hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 0.75rem 0;
+        }
+
+        .logout-button {
+            width: 100%;
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 0.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+
+        .main-content {
+            flex: 1;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .feature-content {
+            display: none;
+            height: 100%;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .feature-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feature-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            background: white;
+        }
+    </style>
+</head>
+<body onload="checkAuth()">
+    <div class="top-bar">
+        <a href="index.html" class="logo">CIVION</a>
+        
+        <div class="page-selector">
+            <span id="current-page">Distribution</span>
+            <div class="page-options">
+                <div class="page-option active" data-tab="distribution">Distribution</div>
+                <div class="page-option" data-tab="analytics">Analytics</div>
+                <div class="page-option" data-tab="customize">Customize Chatbot</div>
+            </div>
+        </div>
+
+        <button class="profile-button" id="profile-button">
+            <span id="profile-username-display">Loading...</span>
+            <div class="profile-details">
+                <p>Username <span id="profile-username"></span></p>
+                <p>Email <span id="profile-email"></span></p>
+                <p>Member Since <span id="profile-login-time"></span></p>
+                <hr>
+                <button onclick="logout()" class="logout-button">Logout</button>
+            </div>
+        </button>
+    </div>
+
+    <main class="main-content">
+        <div class="feature-content active" id="distribution-content">
+            <iframe src="distribution.html"></iframe>
+        </div>
+
+        <div class="feature-content" id="analytics-content">
+            <iframe src="analytics.html"></iframe>
+        </div>
+
+        <div class="feature-content" id="customize-content">
+            <iframe src="customize-chatbot.html"></iframe>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script>
+        // Display user information
+        function displayUserInfo() {
+            const user = getCurrentUser();
+            if (user) {
+                document.getElementById('profile-username-display').textContent = user.username;
+                document.getElementById('profile-username').textContent = user.username;
+                document.getElementById('profile-email').textContent = user.email;
+                document.getElementById('profile-login-time').textContent = new Date(user.loginTime).toLocaleString();
+            }
+        }
+
+        // Call displayUserInfo when the page loads
+        window.addEventListener('load', displayUserInfo);
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const profileButton = document.getElementById('profile-button');
+            const isClickInside = profileButton.contains(event.target);
+            
+            if (!isClickInside) {
+                profileButton.blur();
+            }
+        });
+
+        // Page switching functionality
+        document.querySelectorAll('.page-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Update active option
+                document.querySelectorAll('.page-option').forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+
+                // Update current page display
+                document.getElementById('current-page').textContent = option.textContent;
+
+                // Update active content
+                const contentId = `${option.dataset.tab}-content`;
+                document.querySelectorAll('.feature-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(contentId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
